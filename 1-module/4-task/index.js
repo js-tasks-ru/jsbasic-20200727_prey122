@@ -4,5 +4,9 @@
  * @returns {boolean}
  */
 function checkSpam(str) {
-  // ваш код...
+    str = str.toUpperCase();
+    if(str.indexOf('1XBET') !== -1 || str.indexOf('XXX') !== -1){
+        return true;
+    }else 
+    return false;
 }
