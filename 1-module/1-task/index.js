@@ -5,11 +5,11 @@
  */
 function factorial(n) {
   if (n == 0){
-    n = 1;
+    num = 1;
   }
-  else  
-  for (let i = 1; i < n; i++){
-    n *= i;
+  else  var num = 1 ;
+  for (let i = 1; i <= n; i++){
+    num *= i;
   }
-  return n;
+  return num;
 }
