@@ -11,8 +11,6 @@ function sumSalary(salaries) {
       sumSalary += salaries[key];
     }
   }
-  if( sumSalary === 0){
-    return 0;
-  }
+
   return sumSalary;
 }
