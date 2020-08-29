@@ -14,17 +14,17 @@ function initCarousel() {
       
      
       let target = e.target;
-     // console.log(target.className);
+     
       while(target.className != this){
         if(target.className == 'carousel__arrow carousel__arrow_right') {
           arrowLeft.style.display = '';
           width += cruselSlider.offsetWidth;
-          //console.log(width);
+          
             right(caruselInner, cruselSlider, width, arrowRight);
             break;
         }
         if(target.className == 'carousel__arrow carousel__arrow_left'){
-          //console.log(width);cruselSlider.offsetWidth
+          
           arrowRight.style.display = '';
           width = width - cruselSlider.offsetWidth;
             left(caruselInner, width, arrowLeft);
@@ -43,8 +43,7 @@ function initCarousel() {
 
 function right(carusel, cruselSlider ,width, arrow){
   let allWidth = cruselSlider.offsetWidth * 4;
-  console.log(allWidth);
-//  console.log(width);2964
+  
   if(width < allWidth){
     carusel.style.transform = `translateX(-${width}px)`;
   }
