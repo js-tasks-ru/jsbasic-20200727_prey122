@@ -43,12 +43,12 @@ function initCarousel() {
 
 function right(carusel, cruselSlider ,width, arrow){
   let allWidth = cruselSlider.offsetWidth * 4;
- // console.log(allWidth);
+  console.log(allWidth);
 //  console.log(width);2964
   if(width < allWidth){
     carusel.style.transform = `translateX(-${width}px)`;
   }
-  if(width == 2964){
+  if(width == allWidth - cruselSlider.offsetWidth){
     arrow.style.display= 'none';
   }
   
