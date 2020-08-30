@@ -54,7 +54,7 @@ function right(carusel, cruselSlider ,width, arrow){
 }
 
 function left(carusel, width, arrowLeft){
-  console.log(width);
+  
   if(width >= 0 ){
     carusel.style.transform = `translateX(-${width}px)`;
   }
