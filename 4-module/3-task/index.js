@@ -17,7 +17,7 @@ function highlight(table) {
             }else{table.rows[i].setAttribute('hidden','')}
             
             if(table.rows[i].cells[j].innerHTML == 'm'){
-                console.log(table.rows[i]);
+                
                 table.rows[i].classList.add('male');
             }
             if(table.rows[i].cells[j].innerHTML === 'f'){

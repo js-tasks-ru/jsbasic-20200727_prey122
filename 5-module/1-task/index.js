@@ -5,4 +5,4 @@ function hideSelf() {
   });
   
 }
-//console.log(document.querySelector('.hide-self-button'));
+
