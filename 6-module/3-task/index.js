@@ -45,21 +45,21 @@ export default class Carousel {
   }
 
   onclick(event) {
-      if (event.target.parentNode.className === 'carousel__arrow carousel__arrow_right') {
+      if (event.target.closest('.carousel__arrow_right')) {
       this.arrowLeft.style.display = '';
       this.width += this.caruselSlider.offsetWidth;
       this.countId++;
      // console.log(this.countId);
       this.right(this.slides);
     }
-      if (event.target.parentNode.className === "carousel__arrow carousel__arrow_left"){
+      if (event.target.closest('.carousel__arrow_left')){
         this.arrowRight.style.display = '';
         this.width -= this.caruselSlider.offsetWidth;
         this.countId--;
         this.left();
        // console.log(this.width);
       }
-      if (event.target.parentNode.className === "carousel__button"){
+      if (event.target.closest('.carousel__button')){
          let event = new CustomEvent('product-add', {
           detail: this.slides[this.countId].id ,
           bubbles: true
