@@ -14,9 +14,9 @@ export default class Carousel {
     this.caruselInner =this.elem.querySelector('.carousel__inner');
     this.arrowRight = this.elem.querySelector('.carousel__arrow_right');
     this.countId = 0;
-    this.elem.addEventListener('product-add', (event) => console.log(event.detail));
+    this.elem.addEventListener('product-add', (event) => event.detail);
     if(this.width === 0){
-      //this.arrowLeft.style.display = 'none';
+      
       this.arrowLeft.style.display = 'none';
     }
   }
@@ -49,7 +49,7 @@ export default class Carousel {
       this.arrowLeft.style.display = '';
       this.width += this.caruselSlider.offsetWidth;
       this.countId++;
-     // console.log(this.countId);
+     
       this.right(this.slides);
     }
       if (event.target.closest('.carousel__arrow_left')){
@@ -57,7 +57,7 @@ export default class Carousel {
         this.width -= this.caruselSlider.offsetWidth;
         this.countId--;
         this.left();
-       // console.log(this.width);
+       
       }
       if (event.target.closest('.carousel__button')){
          let event = new CustomEvent('product-add', {
@@ -70,7 +70,7 @@ export default class Carousel {
 
   right(arr){
     let allWidth = this.caruselSlider.offsetWidth * arr.length;
-    //console.log(this.width );
+    
     if (this.width < allWidth){
         this.caruselInner.style.transform = `translateX(-${this.width}px)`;
     }
