@@ -91,13 +91,6 @@ export default class StepSlider {
     this.elem.querySelector('.slider__progress').style.width = `${this.value}%`;
 
     
-    document.body.dispatchEvent(new CustomEvent(
-      's',
-      {
-        detail: this.value,
-        bubbles: true
-      }
-    ));
-    console.log(document.getElementById('holder'));
+ 
   }
 }
