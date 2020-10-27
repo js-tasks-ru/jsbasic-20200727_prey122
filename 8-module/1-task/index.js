@@ -42,6 +42,7 @@ export default class CartIcon {
     // ваш код ...
     this.initialTopCoord = this.elem.getBoundingClientRect().top;
     let isMobile = document.documentElement.clientWidth <= 767;
+
     if(window.pageYOffset > this.initialTopCoord){
       let leftIndent = Math.min(
         document.querySelector('.container').getBoundingClientRect().right + 20,
@@ -55,7 +56,7 @@ export default class CartIcon {
         right: '10px',
         left: leftIndent
       });
-      console.log(document.documentElement.clientWidth);
+      
       
     }
     else {

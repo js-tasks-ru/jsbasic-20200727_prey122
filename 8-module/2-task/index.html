@@ -63,6 +63,7 @@
     let noNutsControl = document.querySelector('[data-no-nuts]');
     noNutsControl.addEventListener('change', () => {
       productGrid.updateFilter({ noNuts: event.target.checked });
+      
     });
 
     let vegetarianOnlyControl = document.querySelector('[data-vegetarian-only]');
