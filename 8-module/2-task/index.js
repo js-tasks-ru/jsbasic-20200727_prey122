@@ -6,7 +6,6 @@ export default class ProductGrid {
     this.products = products;
     this.filters = {};
     this.render();
-<<<<<<< HEAD
   }
 
   render() {
@@ -45,7 +44,5 @@ export default class ProductGrid {
 
   sub(ref) {
     return this.elem.querySelector(`.products-grid__${ref}`);
-=======
->>>>>>> 867b958214e15466a778e2e915b1421ddac7c31e
   }
 }
