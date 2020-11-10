@@ -14,25 +14,55 @@ export default class Cart {
 
   addProduct(product) {
     // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+    let cartItem = this.cartItems.find(
+      item => item.product.id == product.id
+    );
+    if (!cartItem) {
+      cartItem = {
+        product,
+        count: 1
+      };
+      this.cartItems.push(cartItem);
+    } else {
+      cartItem.count++;
+    }
+
+    this.onProductUpdate(cartItem);
   }
 
   updateProductCount(productId, amount) {
     // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+    
+    let cartItem = this.cartItems.find(item => item.product.id == productId);
+    cartItem.count += amount;
+
+    if (cartItem.count === 0) {
+      this.cartItems.splice(this.cartItems.indexOf(cartItem), 1);
+    }
+
+    this.onProductUpdate(cartItem);
   }
 
   isEmpty() {
     // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+    return this.cartItems.length === 0;
   }
 
   getTotalCount() {
     // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+    return this.cartItems.reduce((sum, item) => sum + item.count, 0);
   }
 
   getTotalPrice() {
     // СКОПИРУЙТЕ СЮДЯ СВОЙ КОД
+    return this.cartItems.reduce(
+      (sum, item) => sum + item.product.price * item.count,
+      0
+    );
   }
 
   renderProduct(product, count) {
+    let totalPrice = product.price * count;
     return createElement(`
     <div class="cart-product" data-product-id="${
       product.id
@@ -52,7 +82,7 @@ export default class Cart {
               <img src="/assets/images/icons/square-plus-icon.svg" alt="plus">
             </button>
           </div>
-          <div class="cart-product__price">€${product.price.toFixed(2)}</div>
+          <div class="cart-product__price">€${totalPrice.toFixed(2)}</div>
         </div>
       </div>
     </div>`);
@@ -85,16 +115,74 @@ export default class Cart {
 
   renderModal() {
     // ...ваш код
+    this.modal = new Modal;
+    this.modal.setTitle('Your order');
+    let productArr = this.cartItems.map(item => this.renderProduct(item.product, item.count).outerHTML).join('');
+    let form = this.renderOrderForm().outerHTML;
+    this.modal.setBody(createElement(`<div>${productArr}${form}</div>`));
+    this.modal.open();
+
+    this.modal.elem.addEventListener('click', event => {
+      let product_card = event.target.closest('.cart-product');
+      
+      if (product_card && event.target.closest('.cart-counter__button_plus')) {
+        let data_id = product_card.dataset.productId;
+        this.updateProductCount(data_id, 1);
+     };
+
+     if (product_card && event.target.closest('.cart-counter__button_minus')) {
+      let data_id = product_card.dataset.productId;
+      this.updateProductCount(data_id, -1);
+     }
+    });
+
+    this.modal.elem.querySelector('.cart-form').addEventListener('submit',  event =>  this.onSubmit(event));
+    
   }
 
   onProductUpdate() {
     // ...ваш код
+    if(this.modal){
+      let productArr = this.cartItems.map(item => this.renderProduct(item.product, item.count).outerHTML).join('');
+      if(productArr){
+      let form = this.renderOrderForm().outerHTML;
+      this.modal.setBody(createElement(`<div>${productArr}${form}</div>`));}
+      else {this.modal.close()}
+    }
+    
 
     this.cartIcon.update(this);
   }
 
-  onSubmit(event) {
+ async onSubmit(event) {
     // ...ваш код
+      event.preventDefault();
+      
+        
+      event.target.querySelector('.cart-buttons__button').classList.add('is-loading');
+
+      let formElem = event.target;
+      let response = await fetch('https://httpbin.org/post', {
+        method: 'POST',
+        body: new FormData(formElem)
+      });
+      
+      if (response.status === 200){
+        this.modal.setTitle('Success!');
+        this.cartItems.splice(0, this.cartItems.length);
+        this.modal.setBody(createElement(`<div class="modal__body-inner">
+                                        <p>
+                                          Order successful! Your order is being cooked :) <br>
+                                          We’ll notify you about delivery time shortly.<br>
+                                          <img src="/assets/images/delivery.gif">
+                                        </p>
+                                      </div>`));
+        this.cartIcon.update(this);                                      
+      }      
+      
+
+
+
   };
 
   addEventListeners() {
