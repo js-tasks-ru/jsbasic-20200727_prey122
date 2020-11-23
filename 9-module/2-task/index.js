@@ -46,6 +46,7 @@ export default class Main {
     });
 
     this.ribbonMenu.elem.addEventListener('ribbon-select', ({ detail: categoryId }) => {
+      
       this.productsGrid.updateFilter({
         category: categoryId
       });
