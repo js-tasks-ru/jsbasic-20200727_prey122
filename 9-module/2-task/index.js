@@ -24,18 +24,19 @@ export default class Main {
     this.cart = new Cart(this.cartIcon);
 
     this.products = await this.fetchProducts();
-
+    console.log(this.products);
     this.renderProductsGrid();
 
     this.productsGrid.updateFilter({
       noNuts: document.getElementById('nuts-checkbox').checked,
       vegeterianOnly: document.getElementById('vegeterian-checkbox').checked,
       maxSpiciness: this.stepSlider.value,
-      category: this.ribbonMenu.value
+      category: this.ribbonMenu.value 
     });
 
     document.body.addEventListener('product-add', ({ detail: productId }) => {
       let product = this.products.find(product => product.id == productId);
+      
       this.cart.addProduct(product);
     });
 
@@ -46,7 +47,7 @@ export default class Main {
     });
 
     this.ribbonMenu.elem.addEventListener('ribbon-select', ({ detail: categoryId }) => {
-      
+      console.log(categoryId );
       this.productsGrid.updateFilter({
         category: categoryId
       });
@@ -102,7 +103,7 @@ export default class Main {
   async fetchProducts() {
     let response = await fetch('products.json');
     let products = await response.json();
-
+    
     return products;
   }
 }
