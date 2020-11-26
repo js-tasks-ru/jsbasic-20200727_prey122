@@ -1,5 +1,5 @@
 export default class StepSlider {
-  constructor({ steps, value = 0 }) {
+  constructor({ steps, value  }) {
     this.steps = steps;
     this.value = value;
     this.slider = null;
@@ -57,12 +57,13 @@ export default class StepSlider {
   rener_firs_step(){
     this.slider__steps[this.value].classList.add('slider__step-active');
     this.slider = this.slider__steps[this.value];
-    this.elem.querySelector('.slider__thumb').style.left = `${this.value}%`;
+    this.leftPrecent = this.value / (this.steps - 1) * 100;
+    this.elem.querySelector('.slider__thumb').style.left = `${this.leftPrecent}%`;
     this.elem.querySelector('.slider__value').textContent = this.value;
-    this.elem.querySelector('.slider__progress').style.width = `${this.value}%`;
+    this.elem.querySelector('.slider__progress').style.width = `${this.leftPrecent}%`;
     
     this.slider__thumb.addEventListener('pointerdown', event => this.pointerDown(event));
-    this.slider__thumb.addEventListener('pointerup', event => this.pointerUp(event));
+    document.documentElement.addEventListener('pointerup', event => this.pointerUp(event));
     this.elem.addEventListener('pointerup', event => this.onclick(event));
     this.elem.addEventListener('click', event => this.onclick(event));
   }
