@@ -52,7 +52,7 @@ export default class CartIcon {
       Object.assign(this.elem.style,{
         position: 'fixed',
         top: '50px',
-        zIndex: 1e3,
+        zIndex: 1e1,
         right: '10px',
         left: leftIndent
       });
