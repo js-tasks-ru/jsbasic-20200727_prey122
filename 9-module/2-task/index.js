@@ -36,7 +36,7 @@ export default class Main {
 
     document.body.addEventListener('product-add', ({ detail: productId }) => {
       let product = this.products.find(product => product.id == productId);
-      
+      console.log(productId);
       this.cart.addProduct(product);
     });
 
@@ -91,6 +91,7 @@ export default class Main {
     let cartIconHolder = document.querySelector('[data-cart-icon-holder]');
     this.cartIcon = new CartIcon();
 
+    cartIconHolder.innerHTML ='';
     cartIconHolder.append(this.cartIcon.elem);
   }
 
