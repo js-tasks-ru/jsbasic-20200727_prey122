@@ -56,6 +56,7 @@ export default class Cart {
   }
 
   renderProduct(product, count) {
+    let totalPrice = product.price * count;
     return createElement(`
     <div class="cart-product" data-product-id="${
       product.id
@@ -75,7 +76,7 @@ export default class Cart {
               <img src="/assets/images/icons/square-plus-icon.svg" alt="plus">
             </button>
           </div>
-          <div class="cart-product__price">€${product.price.toFixed(2)}</div>
+          <div class="cart-product__price">€${totalPrice.toFixed(2)}</div>
         </div>
       </div>
     </div>`);

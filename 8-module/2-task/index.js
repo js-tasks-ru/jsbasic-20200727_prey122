@@ -20,6 +20,7 @@ export default class ProductGrid {
     this.sub('inner').innerHTML = '';
 
     for (let product of this.products) {
+      if (this.filters.category != 'All'){
       if (this.filters.noNuts && product.nuts) {continue;}
 
       if (this.filters.vegeterianOnly && !product.vegeterian) {continue;}
@@ -30,6 +31,7 @@ export default class ProductGrid {
 
       if (this.filters.category && product.category != this.filters.category) {
         continue;
+      }
       }
 
       let card = new ProductCard(product);
@@ -45,5 +47,4 @@ export default class ProductGrid {
   sub(ref) {
     return this.elem.querySelector(`.products-grid__${ref}`);
   }
-
 }
