@@ -66,9 +66,7 @@ export default class StepSlider {
 
     this.updead = event => this.pointerUp(event);
 
-    //window.addEventListener('pointerup', this.updead);
 
-    //this.elem.addEventListener('pointerup', event => this.onclick(event));
 
     this.elem.addEventListener('click', event => this.onclick(event));
   }
@@ -130,7 +128,7 @@ export default class StepSlider {
       bubbles: true
     });
     this.elem.dispatchEvent(custum_event);
-    setTimeout(window.removeEventListener('pointerup', this.updead), 1);
+    window.removeEventListener('pointerup', this.updead);
   }
 
   onclick(event){
